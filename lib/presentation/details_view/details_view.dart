@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:interval/domain/model/drinks_model.dart';
 
 class DetailsView extends StatelessWidget {
-  const DetailsView({super.key, required this.drinksModel});
+  const DetailsView({
+    super.key,
+    required this.drinksModel,
+  });
   final DrinksModel drinksModel;
 
   @override
@@ -27,9 +30,12 @@ class DetailsView extends StatelessWidget {
                   ),
                   const SizedBox(height: 15),
                   if (drinksModel.strDrinkThumb != null)
-                    Image.network(
-                      drinksModel.strDrinkThumb!,
-                      width: 200,
+                    Hero(
+                      tag: drinksModel.idDrink ?? '',
+                      child: Image.network(
+                        drinksModel.strDrinkThumb!,
+                        width: 200,
+                      ),
                     ),
                   Text(
                     'Category : ${drinksModel.strCategory ?? ''}',

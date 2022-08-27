@@ -22,10 +22,13 @@ class HomeViewBloc extends Bloc<HomeViewEvent, HomeViewState> {
           emit(state.copyWith(drinksModelList: result, isPageLoading: false));
         }
       } on AppException catch (e) {
-        emit(state.copyWith(
+        emit(
+          state.copyWith(
             isExceptions: true,
             exceptionMessage: e.toString(),
-            isPageLoading: false));
+            isPageLoading: false,
+          ),
+        );
       }
     });
     on<SearchDataEvent>((event, emit) async {
@@ -48,21 +51,27 @@ class HomeViewBloc extends Bloc<HomeViewEvent, HomeViewState> {
         try {
           final result = await apiSevice.fetchDataRum(searchList[0]);
           if (result != null) {
-            emit(state.copyWith(
-              drinksModelList: result,
-              isPageLoading: false,
-            ));
+            emit(
+              state.copyWith(
+                drinksModelList: result,
+                isPageLoading: false,
+              ),
+            );
           }
         } on AppException catch (e) {
-          emit(state.copyWith(
-            isExceptions: true,
-            exceptionMessage: e.toString(),
-            isPageLoading: false,
-          ));
+          emit(
+            state.copyWith(
+              isExceptions: true,
+              exceptionMessage: e.toString(),
+              isPageLoading: false,
+            ),
+          );
           Future.delayed(const Duration(milliseconds: 500), () {
-            emit(state.copyWith(
-              isExceptions: false,
-            ));
+            emit(
+              state.copyWith(
+                isExceptions: false,
+              ),
+            );
           });
         }
       } else {

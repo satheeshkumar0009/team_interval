@@ -55,10 +55,8 @@ class HomeView extends StatelessWidget {
                         return HomeProductCard(
                           drinksModel: state.drinksModelList[index],
                           onTap: () {
-                            Navigator.of(context).pushNamed(
-                              '/details',
-                              arguments: state.drinksModelList[index],
-                            );
+                            Navigator.of(context).pushNamed('/details',
+                                arguments: state.drinksModelList[index]);
                           },
                         );
                       },

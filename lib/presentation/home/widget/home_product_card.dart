@@ -25,9 +25,12 @@ class HomeProductCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   if (drinksModel.strDrinkThumb != null)
-                    Image.network(
-                      drinksModel.strDrinkThumb!,
-                      width: 100,
+                    Hero(
+                      tag: drinksModel.idDrink ?? '',
+                      child: Image.network(
+                        drinksModel.strDrinkThumb!,
+                        width: 100,
+                      ),
                     ),
                   const SizedBox(
                     width: 10,
