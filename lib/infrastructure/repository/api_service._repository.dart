@@ -39,7 +39,11 @@ class ApiSeviceRepository extends IApiSeviceRepository {
       throw AppException('No Internet');
     } catch (e) {
       throw AppException('Some Error occured !');
-    } finally {}
+    }
     return null;
+  }
+
+  void closeClient() {
+    client.close();
   }
 }

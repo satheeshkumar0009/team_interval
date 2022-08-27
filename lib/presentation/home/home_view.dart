@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:http/http.dart';
 import 'package:interval/application/home_view/home_view_bloc.dart';
 import 'package:interval/presentation/home/widget/home_product_card.dart';
+import 'package:interval/presentation/login/widget/login_snack_alert.dart';
 import 'package:interval/presentation/widget/custom_text_fields.dart';
 
 class HomeView extends StatelessWidget {
@@ -14,14 +14,19 @@ class HomeView extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(title: const Text('Home Page')),
-        body: BlocBuilder<HomeViewBloc, HomeViewState>(
+        body: BlocConsumer<HomeViewBloc, HomeViewState>(
+          listener: (context, state) {
+            if (state.isExceptions) {
+              showLoginAlert(context, state.exceptionMessage ?? '');
+            }
+          },
           builder: (context, state) {
             return Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8),
                   child: CustomTextField(
-                    prefixIcon: Icon(Icons.search),
+                    prefixIcon: const Icon(Icons.search),
                     hitText: 'search',
                     controller: controller,
                     onChanged: (value) {
@@ -31,8 +36,18 @@ class HomeView extends StatelessWidget {
                     },
                   ),
                 ),
+                if (state.isExceptions)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Text(state.exceptionMessage ?? 'Unknown error'),
+                  ),
                 if (state.isPageLoading)
-                  const CircularProgressIndicator()
+                  const Center(
+                    child: Padding(
+                      padding: EdgeInsets.all(50),
+                      child: CircularProgressIndicator(),
+                    ),
+                  )
                 else if (state.drinksModelList.isNotEmpty)
                   Expanded(
                     child: ListView.separated(

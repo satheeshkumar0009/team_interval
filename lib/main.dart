@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:interval/domain/injectable/injectable.dart';
 import 'package:interval/presentation/core/app_routes.dart';
-
-import 'domain/injectable/injectable.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

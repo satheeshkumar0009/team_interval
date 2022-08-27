@@ -10,5 +10,8 @@ class HomeViewState with _$HomeViewState {
   }) = _HomeViewState;
 
   factory HomeViewState.initial() => const HomeViewState(
-      drinksModelList: [], isPageLoading: false, isExceptions: false);
+        drinksModelList: [],
+        isPageLoading: false,
+        isExceptions: false,
+      );
 }

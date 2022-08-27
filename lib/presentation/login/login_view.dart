@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:interval/application/login/login_view_bloc.dart';
-import 'package:interval/presentation/widget/custom_text_fields.dart';
 import 'package:interval/presentation/login/widget/login_button.dart';
 import 'package:interval/presentation/login/widget/login_snack_alert.dart';
+import 'package:interval/presentation/widget/custom_text_fields.dart';
 
 class LoginView extends StatelessWidget {
   LoginView({super.key});
